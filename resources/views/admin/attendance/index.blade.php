@@ -13,7 +13,7 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
                 <p></p>
-                <a href="{{ route('admin.class_education.create') }}" class="btn btn-success">Tambah Data</a>
+                <a href="{{ route('admin.attendances.create') }}" class="btn btn-success">Tambah Data</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,32 +21,37 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Pertemuan</th>
+                                <th>Mahasiswa</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Pertemuan</th>
+                                <th>Mahasiswa</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($class_educations as $item)
+                            @foreach ($attendances as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->code }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->classeducation->name }}</td>
+                                    <td>{{ $item->pertemuan }}</td>
+                                    <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td>
-                                        <form action="{{ route('admin.class_education.destroy', $item->id) }}"
-                                            method="post">
+                                        <form action="{{ route('admin.attendances.destroy', $item->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <a class="btn btn-primary"
-                                                href="{{ route('admin.class_education.edit', $item->id) }}"
-                                                role="button"><i class="fa fa-edit"></i></a>
+                                                href="{{ route('admin.attendances.edit', $item->id) }}" role="button"><i
+                                                    class="fa fa-edit"></i></a>
                                             {{-- <a class="btn btn-success" href="{{ route('product.show', ['product'=>$data->id]) }}" role="button"><i class="fa fa-eye"></i></a> --}}
                                             <button type="submit" class="btn btn-danger"
                                                 onclick="return confirm('apakah anda mau menghapus data ini ?')"><i

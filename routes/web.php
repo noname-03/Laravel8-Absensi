@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ClassEducationController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/admin', AdminController::class, 'index')->name('admin');
         Route::get('admin', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
         Route::resource('class_education', ClassEducationController::class);
+        Route::resource('user', UserController::class);
+        Route::resource('attendances', AttendanceController::class);
         // Route::resource('category', CategoryController::class)->parameters([
         //     'category' => 'category:name',
         // ]);
