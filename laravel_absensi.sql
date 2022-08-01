@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 01, 2022 at 05:49 AM
+-- Generation Time: Aug 01, 2022 at 10:09 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel_absensi`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendances`
+--
+
+CREATE TABLE `attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `class_education_id` bigint(20) UNSIGNED NOT NULL,
+  `pertemuan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `user_id`, `class_education_id`, `pertemuan`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 2, 'Pertemuan 2', 'Alfa', NULL, '2022-08-01 02:26:23'),
+(4, 1, 2, 'Pertemuan 3', 'Hadir', '2022-08-01 02:27:04', '2022-08-01 02:27:12');
 
 -- --------------------------------------------------------
 
@@ -79,7 +103,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2022_08_01_032802_create_class_education_table', 1);
+(5, '2022_08_01_032802_create_class_education_table', 1),
+(6, '2022_08_01_074855_create_attendances_table', 2);
 
 -- --------------------------------------------------------
 
@@ -135,11 +160,20 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Mahasiswa', 'mahasiswa@mail.com', 'mahasiswa', NULL, '$2y$10$sJRKIrdj31SxnX/naf1fq.ZTQtPy3WzcQAnGXV74896G/qhsC23/K', NULL, '2022-07-31 22:47:37', '2022-07-31 22:47:37'),
-(2, 'Admin', 'admin@mail.com', 'admin', NULL, '$2y$10$Ch2DXKUUJq34TvzDql7w5e13I5io1rxTTY6I86Uf0iwBl74EOlSSi', NULL, '2022-07-31 22:48:00', '2022-07-31 22:48:00');
+(2, 'Admin', 'admin@mail.com', 'admin', NULL, '$2y$10$Ch2DXKUUJq34TvzDql7w5e13I5io1rxTTY6I86Uf0iwBl74EOlSSi', NULL, '2022-07-31 22:48:00', '2022-07-31 22:48:00'),
+(3, 'mahasiswa1', 'mahasiswa1@mail.com', 'mahasiswa', NULL, 'password', 'password', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `attendances`
+--
+ALTER TABLE `attendances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attendances_user_id_foreign` (`user_id`),
+  ADD KEY `attendances_class_education_id_foreign` (`class_education_id`);
 
 --
 -- Indexes for table `class_education`
@@ -186,6 +220,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `attendances`
+--
+ALTER TABLE `attendances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `class_education`
 --
 ALTER TABLE `class_education`
@@ -201,7 +241,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -213,7 +253,18 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `attendances`
+--
+ALTER TABLE `attendances`
+  ADD CONSTRAINT `attendances_class_education_id_foreign` FOREIGN KEY (`class_education_id`) REFERENCES `class_education` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attendances_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
