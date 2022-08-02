@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 01, 2022 at 10:09 AM
+-- Generation Time: Aug 02, 2022 at 02:12 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -43,7 +43,11 @@ CREATE TABLE `attendances` (
 
 INSERT INTO `attendances` (`id`, `user_id`, `class_education_id`, `pertemuan`, `status`, `created_at`, `updated_at`) VALUES
 (1, 3, 2, 'Pertemuan 2', 'Alfa', NULL, '2022-08-01 02:26:23'),
-(4, 1, 2, 'Pertemuan 3', 'Hadir', '2022-08-01 02:27:04', '2022-08-01 02:27:12');
+(4, 1, 2, 'Pertemuan 3', 'Hadir', '2022-08-01 02:27:04', '2022-08-01 02:27:12'),
+(5, 1, 2, 'Pertemuan 3', 'Alfa', '2022-08-01 18:31:51', '2022-08-01 18:31:51'),
+(6, 3, 2, 'Pertemuan 3', 'Hadir', '2022-08-01 18:31:51', '2022-08-01 18:31:51'),
+(7, 1, 4, 'Pertemuan 1', 'Hadir', '2022-08-01 19:05:26', '2022-08-01 19:05:26'),
+(8, 3, 4, 'Pertemuan 1', 'Alfa', '2022-08-01 19:05:26', '2022-08-01 19:05:26');
 
 -- --------------------------------------------------------
 
@@ -64,7 +68,8 @@ CREATE TABLE `class_education` (
 --
 
 INSERT INTO `class_education` (`id`, `code`, `name`, `created_at`, `updated_at`) VALUES
-(2, 'SI-AL-2021', 'Algoritma', '2022-07-31 22:48:48', '2022-07-31 22:48:48');
+(2, 'SI-AL-2021', 'Algoritma', '2022-07-31 22:48:48', '2022-07-31 22:48:48'),
+(4, 'SI-AL-2021', 'Struktur Data', '2022-08-01 19:04:09', '2022-08-01 19:04:09');
 
 -- --------------------------------------------------------
 
@@ -161,7 +166,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Mahasiswa', 'mahasiswa@mail.com', 'mahasiswa', NULL, '$2y$10$sJRKIrdj31SxnX/naf1fq.ZTQtPy3WzcQAnGXV74896G/qhsC23/K', NULL, '2022-07-31 22:47:37', '2022-07-31 22:47:37'),
 (2, 'Admin', 'admin@mail.com', 'admin', NULL, '$2y$10$Ch2DXKUUJq34TvzDql7w5e13I5io1rxTTY6I86Uf0iwBl74EOlSSi', NULL, '2022-07-31 22:48:00', '2022-07-31 22:48:00'),
-(3, 'mahasiswa1', 'mahasiswa1@mail.com', 'mahasiswa', NULL, 'password', 'password', NULL, NULL);
+(3, 'mahasiswa1', 'mahasiswa1@mail.com', 'mahasiswa', NULL, 'password', 'password', NULL, NULL),
+(4, 'Dosen', 'dosen@mail.com', 'mahasiswa', NULL, '$2y$10$64SXW6rzwyIAfTYsovFsLuYaryeb/4mD1e2b0rFEFzE.GAg8LyM6.', NULL, '2022-08-01 19:08:05', '2022-08-01 19:08:05');
 
 --
 -- Indexes for dumped tables
@@ -223,13 +229,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `class_education`
 --
 ALTER TABLE `class_education`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ClassEducationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\User\ClassEducationController as ClassMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,44 +25,24 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index']);
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('/')->name('admin.')->middleware(['admin'])->group(function () {
         // data
 
-        // Route::get('/admin', function () {
-        //     return "admin";
-        // })->name('admin');
-        // Route::get('/admin', AdminController::class, 'index')->name('admin');
         Route::get('admin', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin');
         Route::resource('class_education', ClassEducationController::class);
         Route::resource('user', UserController::class);
         Route::resource('attendances', AttendanceController::class);
-        // Route::resource('category', CategoryController::class)->parameters([
-        //     'category' => 'category:name',
-        // ]);
-        // Route::resource('product', ProductController::class);
-        // Route::resource('user', UserController::class);
-        // Route::get('datatransaction', [App\Http\Controllers\TransactionController::class, 'datatransaction'])->name('datatransaction');
-        // Route::get('datatransactionshow/{transaction}', [App\Http\Controllers\TransactionController::class, 'datatransactionshow'])->name('datatransactionshow');
     });
 
     Route::prefix('/mahasiswa')->name('mahasiswa.')->middleware(['user'])->group(function () {
         // user
 
         Route::get('/mahasiswa', function () {
-            return "mahasiswa";
+            return redirect()->route('mahasiswa.class.index');
         })->name('mahasiswa');
-        Route::get('mahasiswa', [App\Http\Controllers\User\HomeController::class, 'index'])->name('mahasiswa');
-        // Route::get('user', [UserController::class, 'index']);
-        // Route::resource('cart', CartController::class);
-        // Route::get('getcart', [CartController::class 'indexjson'])->name('getcart');
-        // Route::patch('update-cart', [CartController::class, 'tes'])->name('update.cart');
-        // Route::resource('transaction', TransactionController::class);
+        Route::resource('class', ClassMemberController::class);
     });
 
     Route::get('/logout', function () {
